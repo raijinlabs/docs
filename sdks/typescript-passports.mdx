@@ -1,63 +1,41 @@
 ---
 title: "Passports SDK"
-description: "TypeScript SDK methods for passport operations"
+description: "Create, list, update, and delete identity passports for models, compute nodes, tools, datasets, and agents."
 ---
 
-# Passports SDK Reference
+# Passports SDK
 
-## `passports.list(options?)`
+Create, list, update, and delete identity passports for models, compute nodes, tools, datasets, and agents.
 
-List all passports with optional filtering.
+**Full Speakeasy-generated reference**: [View on GitHub](https://github.com/raijinlabs/lucid-ai-sdk/tree/main/typescript/docs/sdks/passports)
 
-```typescript
-const passports = await lucid.passports.list({
-  type: "model",      // Filter by type
-  tags: ["production"], // Filter by tags
-  limit: 50,           // Pagination
-  offset: 0
-});
-```
+## Methods
 
-## `passports.create(data)`
+### `Passports`
+
+
 
 ```typescript
-const passport = await lucid.passports.create({
-  name: "my-model",
-  type: "model",
-  metadata: { provider: "openai" },
-  tags: ["production"]
-});
+import { RaijinLabsLucidAi } from "raijin-labs-lucid-ai";
+
+const raijinLabsLucidAi = new RaijinLabsLucidAi();
+
+async function run() {
+  const result = await raijinLabsLucidAi.passports.create({
+    type: "dataset",
+    owner: "<value>",
+    metadata: {
+      "key": "<value>",
+      "key1": "<value>",
+      "key2": "<value>",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
 ```
 
-## `passports.get(id)`
+---
 
-```typescript
-const passport = await lucid.passports.get("passport_abc123");
-```
-
-## `passports.update(id, data)`
-
-```typescript
-await lucid.passports.update("passport_abc123", {
-  tags: ["production", "v2"]
-});
-```
-
-## `passports.delete(id)`
-
-```typescript
-await lucid.passports.delete("passport_abc123");
-```
-
-## `passports.sync(id)`
-
-```typescript
-await lucid.passports.sync("passport_abc123");
-```
-
-## `passports.stats()`
-
-```typescript
-const stats = await lucid.passports.stats();
-// { total: 150, byType: { model: 50, agent: 30, ... } }
-```

@@ -1,52 +1,42 @@
 ---
 title: "Python SDK"
-description: "Python SDK for the Lucid API"
+description: "Python SDK for the LucidLayer API (coming soon)"
 ---
-
-import { Warning } from 'mintlify/components'
 
 # Python SDK
 
-<Warning>
-  The Python SDK is **coming soon**. Use the REST API in the meantime.
-</Warning>
+<Callout type="warning">
+  The Python SDK is under development. Use the [REST API](/sdks/rest) or [TypeScript SDK](/sdks/typescript) in the meantime.
+</Callout>
 
-## Planned Usage
+## Coming Soon
+
+A Speakeasy-generated Python SDK will be available at:
+
+- **Package**: `raijin-labs-lucid-ai` (PyPI)
+- **Repository**: [github.com/raijinlabs/lucid-ai-sdk](https://github.com/raijinlabs/lucid-ai-sdk)
+
+## Current Options
+
+In the meantime, you can use:
+
+1. **REST API** — Direct HTTP calls with any Python HTTP library
+2. **TypeScript SDK** — Full-featured SDK available now
 
 ```python
-from lucid import LucidAI
+# Preview of what the Python SDK will look like
+import httpx
 
-lucid = LucidAI(api_key="your-api-key")
+BASE_URL = "https://api.lucid.foundation"
 
 # List passports
-passports = lucid.passports.list()
-
-# Run inference
-response = lucid.chat.completions(
-    model="gpt-4o",
-    messages=[{"role": "user", "content": "Hello!"}]
-)
-
-# Verify receipt
-verification = lucid.receipts.verify(receipt_id)
-```
-
-## REST Alternative
-
-Until the Python SDK is available, use the `requests` library:
-
-```python
-import requests
-
-headers = {
-    "Authorization": f"Bearer {API_KEY}",
-    "Content-Type": "application/json"
-}
-
-response = requests.get(
-    "https://api.lucid.foundation/v1/passports",
-    headers=headers
-)
-
+response = httpx.get(f"{BASE_URL}/v1/passports")
 passports = response.json()
+
+# Run chat completion
+response = httpx.post(f"{BASE_URL}/v1/chat/completions", json={
+    "model": "your-model-passport-id",
+    "messages": [{"role": "user", "content": "Hello!"}],
+})
+result = response.json()
 ```

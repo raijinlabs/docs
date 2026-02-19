@@ -1,39 +1,76 @@
 ---
 title: "MCP Server"
-description: "Model Context Protocol server for AI IDE integration"
+description: "Model Context Protocol server for LucidLayer API integration with AI tools"
 ---
 
-# MCP Server
+# LucidLayer MCP Server
 
-The Lucid MCP server exposes the full API as tools for AI IDEs.
+The LucidLayer MCP (Model Context Protocol) server enables AI coding tools like Cursor, Claude Code, and Windsurf to interact directly with the LucidLayer API.
 
 ## Installation
 
+The MCP server is included in the SDK repository:
+
 ```bash
-npx @raijinlabs/mcp-server
+git clone https://github.com/raijinlabs/lucid-ai-sdk.git
+cd lucid-ai-sdk/mcp
+npm install
 ```
 
-## Environment Variables
+## Configuration
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `LUCID_API_KEY` | Your API key | Yes |
-| `LUCID_BASE_URL` | Custom base URL | No |
+### Cursor
 
-## Supported IDEs
+Add to your `.cursor/mcp.json`:
 
-- [Cursor](/ai-tools/cursor)
-- [Claude Code](/ai-tools/claude-code)
-- [Windsurf](/ai-tools/windsurf)
-- VS Code (with MCP extension)
+```json
+{
+  "mcpServers": {
+    "lucidlayer": {
+      "command": "npx",
+      "args": ["-y", "@raijinlabs/mcp-server"],
+      "env": {
+        "LUCID_API_KEY": "your-api-key",
+        "LUCID_API_URL": "https://api.lucid.foundation"
+      }
+    }
+  }
+}
+```
+
+### Claude Code
+
+Add to your Claude Code MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "lucidlayer": {
+      "command": "npx",
+      "args": ["-y", "@raijinlabs/mcp-server"],
+      "env": {
+        "LUCID_API_KEY": "your-api-key"
+      }
+    }
+  }
+}
+```
 
 ## Available Tools
 
+The MCP server exposes the following tools to AI assistants:
+
 | Tool | Description |
 |------|-------------|
-| `lucid_passports_list` | List passports |
-| `lucid_passports_create` | Create a passport |
-| `lucid_chat_completions` | Run chat completions |
-| `lucid_receipts_verify` | Verify a receipt |
-| `lucid_epochs_current` | Get current epoch |
-| `lucid_health` | Check API health |
+| `list_passports` | List and filter passports |
+| `create_passport` | Create a new passport |
+| `run_inference` | Execute AI inference |
+| `chat_completion` | Run chat completions |
+| `verify_receipt` | Verify a cryptographic receipt |
+| `get_epoch` | Get epoch details |
+| `check_health` | Check API health status |
+
+## Links
+
+- [MCP Server Source](https://github.com/raijinlabs/lucid-ai-sdk/tree/main/mcp)
+- [Model Context Protocol](https://modelcontextprotocol.io/)

@@ -1,47 +1,53 @@
 ---
 title: "Inference SDK"
-description: "TypeScript SDK methods for inference operations"
+description: "Run AI inference, match models to requests, and execute chat completions."
 ---
 
-# Inference SDK Reference
+# Inference SDK
 
-## `chat.completions(options)`
+Run AI inference, match models to requests, and execute chat completions.
 
-OpenAI-compatible chat completions.
+**Full Speakeasy-generated reference**: [View on GitHub](https://github.com/raijinlabs/lucid-ai-sdk/tree/main/typescript/docs/sdks/match)
 
-```typescript
-const response = await lucid.chat.completions({
-  model: "gpt-4o",
-  messages: [
-    { role: "system", content: "You are helpful." },
-    { role: "user", content: "Hello" }
-  ],
-  temperature: 0.7,
-  max_tokens: 1000,
-  stream: false
-});
-```
+## Methods
 
-## `match.match(requirements)`
+### `Match`
 
-Find the best model for your requirements.
+
 
 ```typescript
-const match = await lucid.match.match({
-  requirements: {
-    capabilities: ["chat", "vision"],
-    maxLatency: 2000,
-    costTier: "standard"
-  }
-});
+import { RaijinLabsLucidAi } from "raijin-labs-lucid-ai";
+
+const raijinLabsLucidAi = new RaijinLabsLucidAi();
+
+async function run() {
+  const result = await raijinLabsLucidAi.match.explain({});
+
+  console.log(result);
+}
+
+run();
 ```
 
-## `match.explain(requirements)`
+---
 
-Get a detailed explanation of model selection.
+### `Run`
+
+
 
 ```typescript
-const explanation = await lucid.match.explain({
-  requirements: { capabilities: ["function-calling"] }
-});
+import { RaijinLabsLucidAi } from "raijin-labs-lucid-ai";
+
+const raijinLabsLucidAi = new RaijinLabsLucidAi();
+
+async function run() {
+  const result = await raijinLabsLucidAi.run.inference({});
+
+  console.log(result);
+}
+
+run();
 ```
+
+---
+

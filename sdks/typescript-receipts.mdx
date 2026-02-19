@@ -1,41 +1,41 @@
 ---
 title: "Receipts SDK"
-description: "TypeScript SDK methods for receipt operations"
+description: "Create, verify, and manage cryptographic receipts with Merkle proofs."
 ---
 
-# Receipts SDK Reference
+# Receipts SDK
 
-## `receipts.get(id)`
+Create, verify, and manage cryptographic receipts with Merkle proofs.
 
-```typescript
-const receipt = await lucid.receipts.get("receipt_abc123");
-```
+**Full Speakeasy-generated reference**: [View on GitHub](https://github.com/raijinlabs/lucid-ai-sdk/tree/main/typescript/docs/sdks/receipts)
 
-## `receipts.create(data)`
+## Methods
 
-```typescript
-const receipt = await lucid.receipts.create({
-  runId: "run_abc",
-  inputHash: "sha256:...",
-  outputHash: "sha256:...",
-  modelPassport: "passport_xyz"
-});
-```
+### `Receipts`
 
-## `receipts.verify(id)`
 
-Full verification (signature + MMR proof + on-chain).
 
 ```typescript
-const result = await lucid.receipts.verify("receipt_abc123");
-// { valid: true, signatureValid: true, proofValid: true, onChainValid: true }
+import { RaijinLabsLucidAi } from "raijin-labs-lucid-ai";
+
+const raijinLabsLucidAi = new RaijinLabsLucidAi();
+
+async function run() {
+  const result = await raijinLabsLucidAi.receipts.create({
+    modelPassportId: "<id>",
+    computePassportId: "<id>",
+    policyHash: "<value>",
+    runtime: "<value>",
+    tokensIn: 184620,
+    tokensOut: 329999,
+    ttftMs: 417264,
+  });
+
+  console.log(result);
+}
+
+run();
 ```
 
-## `receipts.proof(id)`
+---
 
-Get the raw MMR inclusion proof.
-
-```typescript
-const proof = await lucid.receipts.proof("receipt_abc123");
-// { leaf: "...", path: [...], root: "...", position: 42 }
-```
