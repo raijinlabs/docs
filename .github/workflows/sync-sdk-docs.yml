@@ -1,16 +1,16 @@
 name: Sync SDK Docs from Speakeasy
 
 on:
-  # Triggered by SDK repo via repository_dispatch
-  repository_dispatch:
-    types: [sdk-updated]
-  
   # Manual trigger
   workflow_dispatch:
   
-  # Weekly sync as fallback
+  # Auto-sync every 6 hours (no PAT needed)
   schedule:
-    - cron: '0 6 * * 1'  # Every Monday at 6 AM UTC
+    - cron: '0 */6 * * *'
+  
+  # Also triggered by repository_dispatch if PAT is configured
+  repository_dispatch:
+    types: [sdk-updated]
 
 jobs:
   sync-sdk-docs:
@@ -33,13 +33,12 @@ jobs:
       - name: Check for changes
         id: changes
         run: |
-          git diff --quiet && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
-      
+          git diff --quiet && echo changed=false >> \ || echo changed=true >>       
       - name: Commit and push
         if: steps.changes.outputs.changed == 'true'
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
           git add sdks/
-          git commit -m "docs: auto-sync SDK docs from Speakeasy [skip ci]"
+          git commit -m 'docs: auto-sync SDK docs from Speakeasy [skip ci]'
           git push
