@@ -3,8 +3,6 @@ title: "Error Reference"
 description: "All error codes and how to handle them"
 ---
 
-# Error Reference
-
 All errors follow a consistent format:
 
 ```json
@@ -20,18 +18,18 @@ All errors follow a consistent format:
 
 ## Error Codes
 
-| Code | Status | Description | Solution |
-|------|--------|-------------|----------|
-| `UNAUTHORIZED` | 401 | Invalid or missing API key | Check your `Authorization` header |
-| `FORBIDDEN` | 403 | Insufficient permissions | Verify your API key has the required scopes |
-| `NOT_FOUND` | 404 | Resource not found | Check the ID or path |
-| `INVALID_PASSPORT` | 404 | Passport not found or revoked | Verify the passport ID and status |
-| `RATE_LIMITED` | 429 | Too many requests | Implement exponential backoff |
-| `MODEL_UNAVAILABLE` | 503 | Selected model is temporarily unavailable | Use a different model or retry |
-| `EPOCH_ANCHORING_FAILED` | 500 | Solana anchoring failed | Will be retried automatically |
-| `RECEIPT_VERIFICATION_FAILED` | 422 | Receipt verification failed | Check the receipt ID and proof |
-| `INVALID_REQUEST` | 400 | Malformed request body | Check required fields |
-| `QUOTA_EXCEEDED` | 402 | Usage quota exceeded | Upgrade your plan |
+| Code                          | Status | Description                               | Solution                                    |
+| ----------------------------- | ------ | ----------------------------------------- | ------------------------------------------- |
+| `UNAUTHORIZED`                | 401    | Invalid or missing API key                | Check your `Authorization` header           |
+| `FORBIDDEN`                   | 403    | Insufficient permissions                  | Verify your API key has the required scopes |
+| `NOT_FOUND`                   | 404    | Resource not found                        | Check the ID or path                        |
+| `INVALID_PASSPORT`            | 404    | Passport not found or revoked             | Verify the passport ID and status           |
+| `RATE_LIMITED`                | 429    | Too many requests                         | Implement exponential backoff               |
+| `MODEL_UNAVAILABLE`           | 503    | Selected model is temporarily unavailable | Use a different model or retry              |
+| `EPOCH_ANCHORING_FAILED`      | 500    | Solana anchoring failed                   | Will be retried automatically               |
+| `RECEIPT_VERIFICATION_FAILED` | 422    | Receipt verification failed               | Check the receipt ID and proof              |
+| `INVALID_REQUEST`             | 400    | Malformed request body                    | Check required fields                       |
+| `QUOTA_EXCEEDED`              | 402    | Usage quota exceeded                      | Upgrade your plan                           |
 
 ## Handling Errors
 

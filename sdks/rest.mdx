@@ -3,8 +3,6 @@ title: "REST API"
 description: "Direct HTTP access to all LucidLayer API endpoints"
 ---
 
-# REST API
-
 All LucidLayer API endpoints are available via standard HTTP requests. The API follows REST conventions with JSON request/response bodies.
 
 ## Base URL
@@ -76,17 +74,17 @@ curl https://api.lucid.foundation/health
 
 ## API Groups
 
-| Group | Base Path | Endpoints |
-|-------|-----------|-----------|
-| Passports | `/v1/passports` | 8 |
-| Inference | `/v1/chat/completions`, `/v1/run`, `/v1/match` | 5 |
-| Convenience | `/v1/models`, `/v1/compute`, `/v1/tools`, `/v1/datasets`, `/v1/agents` | 5 |
-| Receipts | `/v1/receipts`, `/v1/verify`, `/v1/mmr` | 9 |
-| Epochs | `/v1/epochs` | 8 |
-| Payouts | `/v1/payouts` | 4 |
-| Compute | `/v1/compute/nodes` | 2 |
-| Health | `/health` | 7 |
-| Agents | `/api/agents` | 14+ |
+| Group       | Base Path                                                              | Endpoints |
+| ----------- | ---------------------------------------------------------------------- | --------- |
+| Passports   | `/v1/passports`                                                        | 8         |
+| Inference   | `/v1/chat/completions`, `/v1/run`, `/v1/match`                         | 5         |
+| Convenience | `/v1/models`, `/v1/compute`, `/v1/tools`, `/v1/datasets`, `/v1/agents` | 5         |
+| Receipts    | `/v1/receipts`, `/v1/verify`, `/v1/mmr`                                | 9         |
+| Epochs      | `/v1/epochs`                                                           | 8         |
+| Payouts     | `/v1/payouts`                                                          | 4         |
+| Compute     | `/v1/compute/nodes`                                                    | 2         |
+| Health      | `/health`                                                              | 7         |
+| Agents      | `/api/agents`                                                          | 14+       |
 
 ## Full API Reference
 

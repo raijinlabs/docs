@@ -5,39 +5,41 @@ description: "Create, update, and manage passports for models, agents, and more"
 
 import { Steps, CodeGroup } from 'mintlify/components'
 
-# Passport Management
-
 Passports are the universal identity layer in Lucid. This guide covers CRUD operations.
 
 ## Create a Passport
 
 <CodeGroup>
-  ```typescript TypeScript SDK
-  const passport = await lucid.passports.create({
-    name: "my-gpt4o-model",
-    type: "model",
-    metadata: {
-      provider: "openai",
-      model: "gpt-4o",
-      maxTokens: 128000,
-      capabilities: ["chat", "function-calling", "vision"]
-    },
-    tags: ["production", "gpt-4o"]
-  });
 
-  console.log("Created:", passport.id);
-  ```
-  ```bash curl
-  curl -X POST "https://api.lucid.foundation/v1/passports" \
-    -H "Authorization: Bearer $LUCID_API_KEY" \
-    -H "Content-Type: application/json" \
-    -d '{
-      "name": "my-gpt4o-model",
-      "type": "model",
-      "metadata": { "provider": "openai" },
-      "tags": ["production"]
-    }'
-  ```
+```typescript TypeScript SDK
+const passport = await lucid.passports.create({
+  name: "my-gpt4o-model",
+  type: "model",
+  metadata: {
+    provider: "openai",
+    model: "gpt-4o",
+    maxTokens: 128000,
+    capabilities: ["chat", "function-calling", "vision"]
+  },
+  tags: ["production", "gpt-4o"]
+});
+
+console.log("Created:", passport.id);
+```
+
+
+```bash curl
+curl -X POST "https://api.lucid.foundation/v1/passports" \
+  -H "Authorization: Bearer $LUCID_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "my-gpt4o-model",
+    "type": "model",
+    "metadata": { "provider": "openai" },
+    "tags": ["production"]
+  }'
+```
+
 </CodeGroup>
 
 ## List Passports

@@ -3,18 +3,16 @@ title: "Merkle Mountain Range"
 description: "The cryptographic data structure behind Lucid's receipt proofs"
 ---
 
-# Merkle Mountain Range (MMR)
-
 The **Merkle Mountain Range** is an append-only data structure that powers Lucid's receipt verification system.
 
 ## Why MMR?
 
-| Feature | Standard Merkle Tree | MMR |
-|---------|---------------------|-----|
-| Append | Requires rebuild | O(log n) |
-| Proof size | O(log n) | O(log n) |
-| Append-only | No | Yes |
-| Streaming | No | Yes |
+| Feature     | Standard Merkle Tree | MMR      |
+| ----------- | -------------------- | -------- |
+| Append      | Requires rebuild     | O(log n) |
+| Proof size  | O(log n)             | O(log n) |
+| Append-only | No                   | Yes      |
+| Streaming   | No                   | Yes      |
 
 ## How It Works
 
@@ -37,6 +35,7 @@ Each receipt is a **leaf** in the MMR. Internal nodes are the hash of their chil
 ## Inclusion Proof
 
 To prove receipt R3 is in the MMR, you need:
+
 1. R3's hash (the leaf)
 2. R4's hash (sibling)
 3. Node 3's hash (uncle)

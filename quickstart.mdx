@@ -5,44 +5,44 @@ description: "Get up and running with Lucid in under 2 minutes"
 
 import { Steps, CodeGroup, Tip, Warning } from 'mintlify/components'
 
-# Quickstart
-
 <Steps>
   <Step title="Get your API key">
     Sign up at [app.lucid.foundation](https://app.lucid.foundation) and create an API key from the dashboard.
   </Step>
-
   <Step title="Install the SDK">
     <CodeGroup>
-      ```bash npm
-      npm install raijin-labs-lucid-ai
-      ```
-      ```bash yarn
-      yarn add raijin-labs-lucid-ai
-      ```
-      ```bash pnpm
-      pnpm add raijin-labs-lucid-ai
-      ```
+
+    ```bash npm
+    npm install raijin-labs-lucid-ai
+    ```
+
+    
+    ```bash yarn
+    yarn add raijin-labs-lucid-ai
+    ```
+
+    
+    ```bash pnpm
+    pnpm add raijin-labs-lucid-ai
+    ```
+
     </CodeGroup>
   </Step>
-
   <Step title="Initialize the client">
     ```typescript
     import { LucidAI } from "raijin-labs-lucid-ai";
-
+    
     const lucid = new LucidAI({
       bearerAuth: process.env.LUCID_API_KEY,
     });
     ```
   </Step>
-
   <Step title="List your passports">
     ```typescript
     const passports = await lucid.passports.list();
     console.log(`Found ${passports.length} passports`);
     ```
   </Step>
-
   <Step title="Run an inference">
     ```typescript
     const response = await lucid.chat.completions({
@@ -52,17 +52,16 @@ import { Steps, CodeGroup, Tip, Warning } from 'mintlify/components'
         { role: "user", content: "What is verifiable AI?" }
       ]
     });
-
+    
     console.log(response.choices[0].message.content);
     // Receipt ID is in response headers
     ```
   </Step>
-
   <Step title="Verify the receipt">
     ```typescript
     const receipt = await lucid.receipts.get(receiptId);
     const verification = await lucid.receipts.verify(receiptId);
-
+    
     console.log("Verified:", verification.valid);
     console.log("Merkle proof:", verification.proof);
     ```

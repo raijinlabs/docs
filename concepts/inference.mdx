@@ -3,8 +3,6 @@ title: "Inference"
 description: "OpenAI-compatible chat completions with policy-based routing"
 ---
 
-# Inference
-
 Lucid provides an **OpenAI-compatible** chat completions endpoint that routes to 100+ models with policy-based matching.
 
 ## Chat Completions
@@ -71,6 +69,7 @@ for await (const chunk of stream) {
 ## Receipt Generation
 
 Every inference automatically generates a cryptographic receipt:
+
 - **Receipt ID** — Unique identifier
 - **MMR proof** — Merkle Mountain Range inclusion proof
 - **Signature** — Cryptographic signature from the session signer
