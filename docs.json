@@ -9,8 +9,8 @@
   },
   "favicon": "/favicon.svg",
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/lucid_w.png",
+    "dark": "/logo/lucid_w.png"
   },
   "navigation": {
     "tabs": [
@@ -153,7 +153,7 @@
         },
         {
           "anchor": "GitHub",
-          "href": "https://github.com/raijinlabs",
+          "href": "https://github.com/raijinlabs/lucid-ai-sdk",
           "icon": "github"
         },
         {
@@ -195,8 +195,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/raijinlabs",
-      "github": "https://github.com/raijinlabs"
+      "x": "https://x.com/LucidChain",
+      "github": "https://github.com/raijinlabs/lucid-ai-sdk"
     }
   }
 }
