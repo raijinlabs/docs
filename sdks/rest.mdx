@@ -1,0 +1,51 @@
+---
+title: "REST API"
+description: "Direct HTTP access — works with any language"
+---
+
+# REST API
+
+Use the Lucid API directly with any HTTP client.
+
+## Base URL
+
+```
+https://api.lucid.foundation
+```
+
+## Authentication
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  https://api.lucid.foundation/v1/passports
+```
+
+## Common Operations
+
+### List Passports
+
+```bash
+curl https://api.lucid.foundation/v1/passports \
+  -H "Authorization: Bearer $LUCID_API_KEY"
+```
+
+### Chat Completion
+
+```bash
+curl -X POST https://api.lucid.foundation/v1/chat/completions \
+  -H "Authorization: Bearer $LUCID_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [{"role": "user", "content": "Hello"}]
+  }'
+```
+
+### Verify Receipt
+
+```bash
+curl https://api.lucid.foundation/v1/receipts/RECEIPT_ID/verify \
+  -H "Authorization: Bearer $LUCID_API_KEY"
+```
+
+See the full [API Reference](/api-reference/introduction) for all endpoints.

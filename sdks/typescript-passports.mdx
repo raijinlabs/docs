@@ -1,0 +1,63 @@
+---
+title: "Passports SDK"
+description: "TypeScript SDK methods for passport operations"
+---
+
+# Passports SDK Reference
+
+## `passports.list(options?)`
+
+List all passports with optional filtering.
+
+```typescript
+const passports = await lucid.passports.list({
+  type: "model",      // Filter by type
+  tags: ["production"], // Filter by tags
+  limit: 50,           // Pagination
+  offset: 0
+});
+```
+
+## `passports.create(data)`
+
+```typescript
+const passport = await lucid.passports.create({
+  name: "my-model",
+  type: "model",
+  metadata: { provider: "openai" },
+  tags: ["production"]
+});
+```
+
+## `passports.get(id)`
+
+```typescript
+const passport = await lucid.passports.get("passport_abc123");
+```
+
+## `passports.update(id, data)`
+
+```typescript
+await lucid.passports.update("passport_abc123", {
+  tags: ["production", "v2"]
+});
+```
+
+## `passports.delete(id)`
+
+```typescript
+await lucid.passports.delete("passport_abc123");
+```
+
+## `passports.sync(id)`
+
+```typescript
+await lucid.passports.sync("passport_abc123");
+```
+
+## `passports.stats()`
+
+```typescript
+const stats = await lucid.passports.stats();
+// { total: 150, byType: { model: 50, agent: 30, ... } }
+```

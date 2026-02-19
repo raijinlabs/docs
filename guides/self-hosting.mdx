@@ -1,0 +1,57 @@
+---
+title: "Self-Hosting"
+description: "Deploy Lucid infrastructure on your own servers"
+---
+
+# Self-Hosting
+
+Deploy the Lucid stack on your own infrastructure.
+
+## Architecture
+
+```
+┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+│  API Server  │  │Anchor Worker│  │  GPU Worker  │
+│  (Node.js)   │  │  (Node.js)  │  │  (Python)    │
+└──────┬───────┘  └──────┬──────┘  └──────┬───────┘
+       │                 │                 │
+       └─────────┬───────┘                 │
+           ┌─────▼──────┐           ┌──────▼──────┐
+           │  Supabase   │           │   vLLM /    │
+           │ (Postgres)  │           │  Inference  │
+           └─────────────┘           └─────────────┘
+```
+
+## Docker Compose
+
+```yaml
+version: "3.8"
+services:
+  api:
+    build: ./offchain
+    ports: ["3001:3001"]
+    environment:
+      DATABASE_URL: postgresql://...
+      SOLANA_RPC_URL: https://api.mainnet-beta.solana.com
+  
+  anchor-worker:
+    build: ./workers/anchor-worker
+    environment:
+      DATABASE_URL: postgresql://...
+      SIGNER_PRIVATE_KEY: ...
+  
+  inference-worker:
+    build: ./workers/inference-worker
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+```
+
+## Requirements
+
+- PostgreSQL 15+ (or Supabase)
+- Solana RPC endpoint
+- Ed25519 keypair for session signer
+- GPU (optional, for self-hosted inference)

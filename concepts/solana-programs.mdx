@@ -1,0 +1,43 @@
+---
+title: "Solana Programs"
+description: "On-chain programs for receipt anchoring and passport registry"
+---
+
+# Solana Programs
+
+Lucid has two Solana programs written in Rust:
+
+## lucid-receipts
+
+Stores epoch MMR roots on-chain. Each anchored epoch creates a Solana account containing:
+
+- **Epoch ID** — Sequential identifier
+- **MMR Root** — The Merkle Mountain Range root hash
+- **Timestamp** — When the epoch was anchored
+- **Receipt Count** — Number of receipts in the epoch
+
+### Verification
+
+Anyone can verify a receipt by:
+1. Getting the receipt's MMR proof from the API
+2. Fetching the epoch's on-chain MMR root from Solana
+3. Verifying the proof against the root
+
+## lucid-registry
+
+Manages passport registration on-chain:
+
+- **Passport accounts** — On-chain representation of passports
+- **Ownership** — Links passports to Solana wallets
+- **Metadata** — Type, capabilities, status
+
+## Program IDs
+
+| Program | Devnet | Mainnet |
+|---------|--------|---------|
+| lucid-receipts | `LRec...` | TBD |
+| lucid-registry | `LReg...` | TBD |
+
+## Gas Utils
+
+The `gas-utils` program handles CPI (Cross-Program Invocation) for gas-efficient operations across both programs.

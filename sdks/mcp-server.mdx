@@ -1,0 +1,39 @@
+---
+title: "MCP Server"
+description: "Model Context Protocol server for AI IDE integration"
+---
+
+# MCP Server
+
+The Lucid MCP server exposes the full API as tools for AI IDEs.
+
+## Installation
+
+```bash
+npx @raijinlabs/mcp-server
+```
+
+## Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `LUCID_API_KEY` | Your API key | Yes |
+| `LUCID_BASE_URL` | Custom base URL | No |
+
+## Supported IDEs
+
+- [Cursor](/ai-tools/cursor)
+- [Claude Code](/ai-tools/claude-code)
+- [Windsurf](/ai-tools/windsurf)
+- VS Code (with MCP extension)
+
+## Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `lucid_passports_list` | List passports |
+| `lucid_passports_create` | Create a passport |
+| `lucid_chat_completions` | Run chat completions |
+| `lucid_receipts_verify` | Verify a receipt |
+| `lucid_epochs_current` | Get current epoch |
+| `lucid_health` | Check API health |

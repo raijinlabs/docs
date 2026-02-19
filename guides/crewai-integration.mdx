@@ -1,0 +1,34 @@
+---
+title: "CrewAI Integration"
+description: "Multi-agent systems with CrewAI and Lucid"
+---
+
+# CrewAI Integration
+
+Build multi-agent systems using CrewAI with Lucid's verifiable infrastructure.
+
+## Setup
+
+```python
+from crewai import Agent, Task, Crew
+from lucid import LucidProvider
+
+# Use Lucid as the LLM provider
+provider = LucidProvider(api_key="your-key")
+
+researcher = Agent(
+    role="Researcher",
+    goal="Find accurate information",
+    llm=provider.get_model("gpt-4o")
+)
+
+writer = Agent(
+    role="Writer",
+    goal="Create compelling content",
+    llm=provider.get_model("claude-3-sonnet")
+)
+```
+
+## Verifiable Crews
+
+Every agent action generates a Lucid receipt, creating a full audit trail of the multi-agent collaboration.

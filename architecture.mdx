@@ -1,0 +1,76 @@
+---
+title: "Architecture"
+description: "How Lucid works — from request to on-chain anchor"
+---
+
+# Architecture
+
+Lucid is a **verifiable AI inference protocol** with three layers:
+
+## System Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      YOUR APPLICATION                        │
+│  TypeScript SDK  │  REST API  │  MCP Server  │  n8n Nodes   │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+┌────────────────────────▼────────────────────────────────────┐
+│                    LUCID API LAYER                            │
+│                                                              │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
+│  │Passports │  │ Matching │  │ Routing  │  │ Receipts │   │
+│  │ Registry │  │  Engine  │  │  Engine  │  │  (MMR)   │   │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘   │
+│                                                              │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
+│  │  Epochs  │  │ Payouts  │  │  Agents  │  │ Compute  │   │
+│  │Anchoring │  │  Engine  │  │Orchestr. │  │  Nodes   │   │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘   │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+┌────────────────────────▼────────────────────────────────────┐
+│                    ON-CHAIN LAYER                             │
+│                                                              │
+│  ┌────────────────┐  ┌────────────────┐                     │
+│  │ lucid-receipts │  │ lucid-registry │  ← Solana Programs  │
+│  │  (Rust/BPF)    │  │  (Rust/BPF)    │                     │
+│  └────────────────┘  └────────────────┘                     │
+│                                                              │
+│  Solana Mainnet — Immutable receipt anchors                  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Request Flow
+
+1. **Client** sends inference request via SDK or REST
+2. **Matching Engine** selects optimal model based on policy
+3. **Routing Engine** dispatches to the selected LLM provider
+4. **LLM** processes the request and returns response
+5. **Receipt Service** creates cryptographic receipt with MMR proof
+6. **Epoch Service** batches receipts for on-chain anchoring
+7. **Anchor Worker** commits epoch to Solana
+
+## Key Components
+
+### Passports
+Universal identity for everything in the network: models, compute nodes, tools, datasets, agents. Each passport has metadata, tags, capabilities, and an on-chain representation.
+
+### Merkle Mountain Range (MMR)
+An append-only data structure used for receipt proofs. Each receipt is a leaf in the MMR tree. Inclusion proofs allow verification without downloading the entire tree.
+
+### Epoch Anchoring
+Receipts are batched into epochs. Each epoch's MMR root is anchored on Solana, creating an immutable proof that the receipts existed at a specific point in time.
+
+### Agent Orchestrator
+Autonomous agents follow a plan → accomplish → execute → validate lifecycle. Each step generates receipts, creating a full audit trail of agent behavior.
+
+## Repositories
+
+| Repo | Purpose |
+|------|---------|
+| [Lucid-L2](https://github.com/raijinlabs/Lucid-L2) | Backend protocol (offchain API + Solana programs) |
+| [LucidMerged](https://github.com/daishizenSensei/LucidMerged) | Frontend platform + AI studio |
+| [lucid-plateform-core](https://github.com/raijinlabs/lucid-plateform-core) | Platform infrastructure (billing, keys, metering) |
+| [lucid-ai-sdk](https://github.com/raijinlabs/lucid-ai-sdk) | TypeScript SDK (Speakeasy-generated) |
+| [docs](https://github.com/raijinlabs/docs) | This documentation site |

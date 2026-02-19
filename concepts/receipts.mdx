@@ -1,0 +1,57 @@
+---
+title: "Receipts"
+description: "Cryptographic receipts with Merkle Mountain Range proofs"
+---
+
+# Receipts
+
+Every AI inference in Lucid generates a **cryptographic receipt** — an immutable proof that the computation happened.
+
+## What's in a Receipt?
+
+| Field | Description |
+|-------|-------------|
+| `id` | Unique receipt identifier |
+| `run_id` | The inference run that generated this receipt |
+| `input_hash` | SHA-256 hash of the input |
+| `output_hash` | SHA-256 hash of the output |
+| `model_passport` | Passport ID of the model used |
+| `signature` | Ed25519 signature from session signer |
+| `mmr_position` | Position in the Merkle Mountain Range |
+| `epoch_id` | The epoch this receipt belongs to |
+
+## Create & Verify
+
+```typescript
+// Receipts are created automatically during inference
+// You can also create them manually:
+const receipt = await lucid.receipts.create({
+  runId: "run_abc123",
+  inputHash: "sha256:...",
+  outputHash: "sha256:...",
+  modelPassport: "passport_xyz"
+});
+
+// Verify a receipt
+const verification = await lucid.receipts.verify(receipt.id);
+console.log("Valid:", verification.valid);
+console.log("Signature verified:", verification.signatureValid);
+console.log("MMR proof verified:", verification.proofValid);
+```
+
+## Merkle Proof
+
+Get the inclusion proof for a receipt:
+
+```typescript
+const proof = await lucid.receipts.proof(receiptId);
+console.log("Root:", proof.root);
+console.log("Path:", proof.path);
+console.log("Position:", proof.position);
+```
+
+## Verify by Hash
+
+```typescript
+const result = await lucid.verify.byHash("sha256:abc123...");
+```

@@ -1,0 +1,48 @@
+---
+title: "Compute Providers"
+description: "Register and manage compute nodes in the Lucid network"
+---
+
+# Compute Providers
+
+Register your GPU infrastructure as a compute node in the Lucid network.
+
+## Register a Node
+
+```typescript
+const passport = await lucid.passports.create({
+  name: "my-gpu-node",
+  type: "compute",
+  metadata: {
+    gpu: "NVIDIA A100",
+    vram: "80GB",
+    region: "us-east-1",
+    capabilities: ["inference", "fine-tuning"]
+  }
+});
+```
+
+## Heartbeat
+
+Send regular heartbeats to maintain active status:
+
+```typescript
+// Send every 30 seconds
+setInterval(async () => {
+  await lucid.compute.heartbeat({
+    passportId: passport.id,
+    status: "healthy",
+    load: 0.45, // 45% utilization
+    availableModels: ["llama-3-70b", "mistral-7b"]
+  });
+}, 30000);
+```
+
+## Health Check
+
+```typescript
+const health = await lucid.compute.health(passport.id);
+console.log("Status:", health.status);
+console.log("Uptime:", health.uptimeSeconds);
+console.log("Jobs completed:", health.jobsCompleted);
+```

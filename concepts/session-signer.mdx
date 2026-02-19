@@ -1,0 +1,45 @@
+---
+title: "Session Signer"
+description: "Cryptographic signing for receipt authenticity"
+---
+
+# Session Signer
+
+The **Session Signer** is a server-side Ed25519 keypair that signs every receipt, providing cryptographic authenticity.
+
+## How It Works
+
+1. When a receipt is created, the signer generates an Ed25519 signature
+2. The signature covers: `receipt_id || input_hash || output_hash || timestamp`
+3. Anyone can verify the signature using the signer's public key
+
+## Get the Public Key
+
+```typescript
+const { publicKey } = await lucid.signer.pubkey();
+// Use this to verify signatures offline
+```
+
+## Verify a Signature
+
+```typescript
+import { verify } from "@noble/ed25519";
+
+const receipt = await lucid.receipts.get(receiptId);
+const { publicKey } = await lucid.signer.pubkey();
+
+const message = Buffer.concat([
+  Buffer.from(receipt.id),
+  Buffer.from(receipt.inputHash),
+  Buffer.from(receipt.outputHash),
+  Buffer.from(receipt.timestamp)
+]);
+
+const valid = await verify(receipt.signature, message, publicKey);
+```
+
+## Security Model
+
+- The signer key is managed server-side (not exposed to clients)
+- Key rotation is supported (old signatures remain valid with the old key)
+- The public key is always available via the API

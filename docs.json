@@ -1,68 +1,147 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Lucid Documentation",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#6366F1",
+    "light": "#818CF8",
+    "dark": "#4F46E5",
+    "background": {
+      "dark": "#0B0F1A"
+    }
   },
   "favicon": "/favicon.svg",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Overview",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
               "index",
               "quickstart",
-              "development"
+              "authentication",
+              "sdk-installation"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Core Concepts",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "concepts/passports",
+              "concepts/inference",
+              "concepts/receipts",
+              "concepts/epochs",
+              "concepts/agents",
+              "concepts/mmr",
+              "concepts/solana-programs",
+              "concepts/session-signer"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Architecture",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "architecture",
+              "glossary"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Guides",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Beginner",
             "pages": [
-              "api-reference/introduction"
+              "guides/first-inference",
+              "guides/passport-management",
+              "guides/error-handling"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Intermediate",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "guides/verifiable-receipts",
+              "guides/epoch-verification",
+              "guides/agent-orchestration",
+              "guides/streaming"
+            ]
+          },
+          {
+            "group": "Advanced",
+            "pages": [
+              "guides/compute-providers",
+              "guides/hf-passport-sync",
+              "guides/n8n-integration",
+              "guides/nango-oauth",
+              "guides/crewai-integration",
+              "guides/self-hosting",
+              "guides/webhooks"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "API Documentation",
+            "pages": [
+              "api-reference/introduction",
+              "api-reference/errors",
+              "api-reference/rate-limits"
+            ]
+          },
+          {
+            "group": "API Endpoints",
+            "openapi": "https://raw.githubusercontent.com/raijinlabs/lucid-ai-sdk/main/openapi-with-code-samples.yaml"
+          }
+        ]
+      },
+      {
+        "tab": "SDKs & Tools",
+        "groups": [
+          {
+            "group": "SDKs",
+            "pages": [
+              "sdks/typescript",
+              "sdks/typescript-passports",
+              "sdks/typescript-inference",
+              "sdks/typescript-receipts",
+              "sdks/typescript-agents",
+              "sdks/python",
+              "sdks/rest"
+            ]
+          },
+          {
+            "group": "AI Tools",
+            "pages": [
+              "ai-tools/cursor",
+              "ai-tools/claude-code",
+              "ai-tools/windsurf",
+              "sdks/mcp-server"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Platform",
+        "groups": [
+          {
+            "group": "Platform",
+            "pages": [
+              "platform/billing",
+              "platform/api-keys",
+              "platform/metering",
+              "platform/quotas",
+              "platform/organizations",
+              "platform/dashboard",
+              "platform/security",
+              "platform/sla"
             ]
           }
         ]
@@ -71,52 +150,56 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "API Status",
+          "href": "https://api.lucid.foundation/health",
+          "icon": "signal"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "GitHub",
+          "href": "https://github.com/raijinlabs",
+          "icon": "github"
+        },
+        {
+          "anchor": "SDK",
+          "href": "https://www.npmjs.com/package/raijin-labs-lucid-ai",
+          "icon": "npm"
         }
       ]
     }
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@lucid.foundation"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "href": "https://app.lucid.foundation"
     }
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/raijinlabs",
+      "github": "https://github.com/raijinlabs"
     }
   }
 }

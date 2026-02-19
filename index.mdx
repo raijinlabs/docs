@@ -1,97 +1,90 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "Lucid Documentation"
+description: "The verifiable AI inference protocol — cryptographic receipts, on-chain anchoring, and policy-based routing for 100+ LLM models."
 ---
 
-## Setting up
+import { Card, CardGroup, Steps, Tip } from 'mintlify/components'
 
-Get your documentation site up and running in minutes.
+# Welcome to Lucid
 
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
+**Lucid** is a verifiable AI inference protocol. Every AI call gets a cryptographic receipt, anchored on Solana, with full auditability.
 
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
+<CardGroup cols={3}>
+  <Card title="Passports" icon="id-card" href="/concepts/passports">
+    Identity layer for models, compute nodes, tools, datasets, and agents
   </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
+  <Card title="Inference" icon="bolt" href="/concepts/inference">
+    OpenAI-compatible chat completions with policy-based routing
   </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+  <Card title="Receipts" icon="receipt" href="/concepts/receipts">
+    Cryptographic receipts with Merkle Mountain Range proofs
   </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
+  <Card title="Epochs" icon="clock" href="/concepts/epochs">
+    Batch anchoring to Solana with verifiable transaction proofs
   </Card>
-</Columns>
+  <Card title="Agents" icon="robot" href="/concepts/agents">
+    Autonomous agent orchestration with plan → accomplish → execute
+  </Card>
+  <Card title="Payouts" icon="coins" href="/api-reference/introduction">
+    Automatic payout calculation and verification
+  </Card>
+</CardGroup>
 
-## Create beautiful pages
+## Get Started in 2 Minutes
 
-Everything you need to create world-class documentation.
+<Steps>
+  <Step title="Install the SDK">
+    ```bash
+    npm install raijin-labs-lucid-ai
+    ```
+  </Step>
+  <Step title="Run your first inference">
+    ```typescript
+    import { LucidAI } from "raijin-labs-lucid-ai";
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+    const lucid = new LucidAI({ bearerAuth: "your-api-key" });
 
-## Need inspiration?
+    const result = await lucid.chat.completions({
+      model: "gpt-4o",
+      messages: [{ role: "user", content: "Hello from Lucid!" }]
+    });
+    ```
+  </Step>
+  <Step title="Verify your receipt">
+    Every inference generates a cryptographic receipt anchored on Solana.
+    [Learn more →](/concepts/receipts)
+  </Step>
+</Steps>
 
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+<Tip>
+  **65+ API endpoints** are auto-documented in the [API Reference](/api-reference/introduction) tab with interactive playground.
+</Tip>
+
+## Architecture Overview
+
+```
+┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│   Your App  │────▶│  Lucid API   │────▶│  LLM Model  │
+│  (SDK/REST) │     │  (Routing)   │     │  (100+)     │
+└─────────────┘     └──────┬───────┘     └─────────────┘
+                           │
+                    ┌──────▼───────┐
+                    │   Receipt    │──── Cryptographic proof
+                    │   (MMR)      │──── Merkle Mountain Range
+                    └──────┬───────┘
+                           │
+                    ┌──────▼───────┐
+                    │   Solana     │──── On-chain anchor
+                    │   (Epoch)    │──── Batch verification
+                    └──────────────┘
+```
+
+## Why Lucid?
+
+| Feature | Traditional API | Lucid Protocol |
+|---------|----------------|----------------|
+| Auditability | Logs (mutable) | Cryptographic receipts (immutable) |
+| Verification | Trust the provider | Verify on-chain |
+| Multi-model | One provider | 100+ models, policy-based routing |
+| Cost tracking | Approximate | Exact, per-receipt |
+| Agent proofs | None | Full execution trace on-chain |

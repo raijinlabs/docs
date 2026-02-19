@@ -1,0 +1,47 @@
+---
+title: "Inference SDK"
+description: "TypeScript SDK methods for inference operations"
+---
+
+# Inference SDK Reference
+
+## `chat.completions(options)`
+
+OpenAI-compatible chat completions.
+
+```typescript
+const response = await lucid.chat.completions({
+  model: "gpt-4o",
+  messages: [
+    { role: "system", content: "You are helpful." },
+    { role: "user", content: "Hello" }
+  ],
+  temperature: 0.7,
+  max_tokens: 1000,
+  stream: false
+});
+```
+
+## `match.match(requirements)`
+
+Find the best model for your requirements.
+
+```typescript
+const match = await lucid.match.match({
+  requirements: {
+    capabilities: ["chat", "vision"],
+    maxLatency: 2000,
+    costTier: "standard"
+  }
+});
+```
+
+## `match.explain(requirements)`
+
+Get a detailed explanation of model selection.
+
+```typescript
+const explanation = await lucid.match.explain({
+  requirements: { capabilities: ["function-calling"] }
+});
+```

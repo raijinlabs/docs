@@ -1,0 +1,66 @@
+---
+title: "Agents SDK"
+description: "TypeScript SDK methods for agent orchestration"
+---
+
+# Agents SDK Reference
+
+## `agents.init(options)`
+
+```typescript
+const agent = await lucid.agents.init({
+  name: "research-agent",
+  passportId: "passport_agent_123",
+  capabilities: ["web-search", "summarization"]
+});
+```
+
+## `agents.plan(options)`
+
+```typescript
+const plan = await lucid.agents.plan({
+  agentId: agent.id,
+  goal: "Research quantum computing breakthroughs"
+});
+```
+
+## `agents.accomplish(options)`
+
+```typescript
+const result = await lucid.agents.accomplish({
+  agentId: agent.id,
+  planId: plan.id
+});
+```
+
+## `agents.execute(options)`
+
+```typescript
+const execution = await lucid.agents.execute({
+  agentId: agent.id,
+  planId: plan.id,
+  steps: result.steps
+});
+```
+
+## `agents.validate(options)`
+
+```typescript
+const validation = await lucid.agents.validate({
+  agentId: agent.id,
+  executionId: execution.id
+});
+```
+
+## `agents.history(agentId)`
+
+```typescript
+const history = await lucid.agents.history(agent.id);
+```
+
+## `agents.root(agentId)`
+
+```typescript
+const root = await lucid.agents.root(agent.id);
+// MMR root for all agent receipts
+```

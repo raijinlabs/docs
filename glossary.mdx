@@ -1,0 +1,23 @@
+---
+title: "Glossary"
+description: "Key terms and definitions"
+---
+
+# Glossary
+
+| Term | Definition |
+|------|-----------|
+| **Passport** | Universal identity for models, compute nodes, tools, datasets, and agents |
+| **Receipt** | Cryptographic proof of an AI inference, including input/output hashes and signature |
+| **MMR** | Merkle Mountain Range — append-only data structure for receipt proofs |
+| **Epoch** | A batch of receipts anchored to Solana as a single transaction |
+| **Anchoring** | The process of committing an epoch's MMR root to the Solana blockchain |
+| **Session Signer** | Server-side Ed25519 keypair that signs receipts |
+| **Inclusion Proof** | Merkle proof showing a receipt is part of an epoch's MMR |
+| **Policy** | Rules for model matching (capabilities, cost, latency requirements) |
+| **Matching Engine** | Service that selects the optimal model based on policy |
+| **Routing Engine** | Service that dispatches requests to the selected LLM provider |
+| **Agent Orchestrator** | Service managing the plan → accomplish → execute → validate lifecycle |
+| **Payout** | Revenue split calculation between model provider, compute provider, and platform |
+| **FlowSpec** | Visual workflow specification format (n8n-compatible) |
+| **BYOK** | Bring Your Own Key — use your own provider API keys through Lucid |

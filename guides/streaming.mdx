@@ -1,0 +1,60 @@
+---
+title: "Streaming"
+description: "Real-time streaming responses with server-sent events"
+---
+
+# Streaming
+
+Lucid supports SSE (Server-Sent Events) streaming for real-time responses.
+
+## TypeScript SDK
+
+```typescript
+const stream = await lucid.chat.completions({
+  model: "gpt-4o",
+  messages: [
+    { role: "user", content: "Write a short poem about AI" }
+  ],
+  stream: true
+});
+
+for await (const chunk of stream) {
+  const content = chunk.choices[0]?.delta?.content;
+  if (content) process.stdout.write(content);
+}
+```
+
+## curl
+
+```bash
+curl -X POST "https://api.lucid.foundation/v1/chat/completions" \
+  -H "Authorization: Bearer $LUCID_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [{"role": "user", "content": "Hello"}],
+    "stream": true
+  }'
+```
+
+## Next.js Integration
+
+```typescript
+// app/api/chat/route.ts
+import { LucidAI } from "raijin-labs-lucid-ai";
+
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+  const lucid = new LucidAI({ bearerAuth: process.env.LUCID_API_KEY });
+
+  const stream = await lucid.chat.completions({
+    model: "gpt-4o",
+    messages,
+    stream: true,
+  });
+
+  return new Response(stream, {
+    headers: { "Content-Type": "text/event-stream" },
+  });
+}
+```

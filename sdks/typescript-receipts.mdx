@@ -1,0 +1,41 @@
+---
+title: "Receipts SDK"
+description: "TypeScript SDK methods for receipt operations"
+---
+
+# Receipts SDK Reference
+
+## `receipts.get(id)`
+
+```typescript
+const receipt = await lucid.receipts.get("receipt_abc123");
+```
+
+## `receipts.create(data)`
+
+```typescript
+const receipt = await lucid.receipts.create({
+  runId: "run_abc",
+  inputHash: "sha256:...",
+  outputHash: "sha256:...",
+  modelPassport: "passport_xyz"
+});
+```
+
+## `receipts.verify(id)`
+
+Full verification (signature + MMR proof + on-chain).
+
+```typescript
+const result = await lucid.receipts.verify("receipt_abc123");
+// { valid: true, signatureValid: true, proofValid: true, onChainValid: true }
+```
+
+## `receipts.proof(id)`
+
+Get the raw MMR inclusion proof.
+
+```typescript
+const proof = await lucid.receipts.proof("receipt_abc123");
+// { leaf: "...", path: [...], root: "...", position: 42 }
+```

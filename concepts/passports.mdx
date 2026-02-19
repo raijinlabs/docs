@@ -1,0 +1,68 @@
+---
+title: "Passports"
+description: "Universal identity layer for models, compute nodes, tools, datasets, and agents"
+---
+
+import { Tip } from 'mintlify/components'
+
+# Passports
+
+A **Passport** is the universal identity primitive in Lucid. Everything in the network — models, compute nodes, tools, datasets, and agents — has a passport.
+
+## Passport Types
+
+| Type | Description | Example |
+|------|-------------|---------|
+| `model` | LLM or AI model | GPT-4o, Claude 3.5 Sonnet |
+| `compute` | Compute node provider | GPU worker, inference server |
+| `tool` | External tool or API | Web search, calculator |
+| `dataset` | Training or reference data | Knowledge base, embeddings |
+| `agent` | Autonomous agent | Planning agent, research agent |
+
+## Lifecycle
+
+```
+Created → Active → Deprecated → Revoked
+              │
+              └──→ Synced (on-chain)
+```
+
+## Create a Passport
+
+```typescript
+const passport = await lucid.passports.create({
+  name: "my-gpt4o",
+  type: "model",
+  metadata: {
+    provider: "openai",
+    maxTokens: 128000,
+    capabilities: ["chat", "function-calling", "vision"]
+  },
+  tags: ["production", "gpt-4o"]
+});
+```
+
+## List & Filter
+
+```typescript
+// List all model passports
+const models = await lucid.passports.list({
+  type: "model",
+  tags: ["production"]
+});
+
+// Get passport stats
+const stats = await lucid.passports.stats();
+```
+
+## On-Chain Sync
+
+Passports can be synced to Solana for on-chain verification:
+
+```typescript
+await lucid.passports.sync(passportId);
+```
+
+<Tip>
+  Passport sync is batched — use `GET /v1/passports/pending-sync` to check the queue.
+</Tip>

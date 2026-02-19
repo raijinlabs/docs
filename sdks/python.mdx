@@ -1,0 +1,52 @@
+---
+title: "Python SDK"
+description: "Python SDK for the Lucid API"
+---
+
+import { Warning } from 'mintlify/components'
+
+# Python SDK
+
+<Warning>
+  The Python SDK is **coming soon**. Use the REST API in the meantime.
+</Warning>
+
+## Planned Usage
+
+```python
+from lucid import LucidAI
+
+lucid = LucidAI(api_key="your-api-key")
+
+# List passports
+passports = lucid.passports.list()
+
+# Run inference
+response = lucid.chat.completions(
+    model="gpt-4o",
+    messages=[{"role": "user", "content": "Hello!"}]
+)
+
+# Verify receipt
+verification = lucid.receipts.verify(receipt_id)
+```
+
+## REST Alternative
+
+Until the Python SDK is available, use the `requests` library:
+
+```python
+import requests
+
+headers = {
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json"
+}
+
+response = requests.get(
+    "https://api.lucid.foundation/v1/passports",
+    headers=headers
+)
+
+passports = response.json()
+```

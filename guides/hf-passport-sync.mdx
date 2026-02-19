@@ -1,0 +1,38 @@
+---
+title: "HuggingFace Passport Sync"
+description: "Sync HuggingFace models as Lucid passports"
+---
+
+# HuggingFace Passport Sync
+
+Automatically import HuggingFace models as Lucid passports with full metadata.
+
+## Sync a Model
+
+```typescript
+const passport = await lucid.passports.sync({
+  source: "huggingface",
+  modelId: "meta-llama/Llama-3-70b",
+  tags: ["llama", "open-source"]
+});
+
+console.log("Passport:", passport.id);
+console.log("Metadata:", passport.metadata);
+// Includes: downloads, likes, pipeline_tag, library_name, etc.
+```
+
+## Bulk Sync
+
+```typescript
+const models = [
+  "meta-llama/Llama-3-70b",
+  "mistralai/Mistral-7B-v0.1",
+  "google/gemma-2-9b"
+];
+
+const passports = await Promise.all(
+  models.map(modelId =>
+    lucid.passports.sync({ source: "huggingface", modelId })
+  )
+);
+```

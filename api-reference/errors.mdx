@@ -1,0 +1,53 @@
+---
+title: "Error Reference"
+description: "All error codes and how to handle them"
+---
+
+# Error Reference
+
+All errors follow a consistent format:
+
+```json
+{
+  "error": {
+    "code": "INVALID_PASSPORT",
+    "message": "Passport not found or has been revoked",
+    "status": 404,
+    "details": {}
+  }
+}
+```
+
+## Error Codes
+
+| Code | Status | Description | Solution |
+|------|--------|-------------|----------|
+| `UNAUTHORIZED` | 401 | Invalid or missing API key | Check your `Authorization` header |
+| `FORBIDDEN` | 403 | Insufficient permissions | Verify your API key has the required scopes |
+| `NOT_FOUND` | 404 | Resource not found | Check the ID or path |
+| `INVALID_PASSPORT` | 404 | Passport not found or revoked | Verify the passport ID and status |
+| `RATE_LIMITED` | 429 | Too many requests | Implement exponential backoff |
+| `MODEL_UNAVAILABLE` | 503 | Selected model is temporarily unavailable | Use a different model or retry |
+| `EPOCH_ANCHORING_FAILED` | 500 | Solana anchoring failed | Will be retried automatically |
+| `RECEIPT_VERIFICATION_FAILED` | 422 | Receipt verification failed | Check the receipt ID and proof |
+| `INVALID_REQUEST` | 400 | Malformed request body | Check required fields |
+| `QUOTA_EXCEEDED` | 402 | Usage quota exceeded | Upgrade your plan |
+
+## Handling Errors
+
+```typescript
+try {
+  const result = await lucid.chat.completions({ ... });
+} catch (error) {
+  if (error.status === 429) {
+    // Rate limited — wait and retry
+    await sleep(error.retryAfter * 1000);
+    return retry();
+  }
+  if (error.status === 503) {
+    // Model unavailable — try alternative
+    return lucid.chat.completions({ model: "claude-3-sonnet", ... });
+  }
+  throw error;
+}
+```

@@ -1,0 +1,30 @@
+---
+title: "Usage Metering"
+description: "Track API usage and costs"
+---
+
+# Usage Metering
+
+Lucid uses OpenMeter for precise usage tracking.
+
+## What's Metered
+
+| Metric | Description |
+|--------|-------------|
+| `requests` | Total API requests |
+| `tokens_in` | Input tokens processed |
+| `tokens_out` | Output tokens generated |
+| `receipts` | Receipts created |
+| `epochs_anchored` | Epochs anchored on Solana |
+
+## View Usage
+
+```typescript
+const usage = await lucid.usage.current();
+console.log("Requests this month:", usage.requests);
+console.log("Tokens used:", usage.tokensIn + usage.tokensOut);
+```
+
+## Dashboard
+
+View real-time usage at [Dashboard → Usage](https://app.lucid.foundation/settings/usage).
